@@ -1,2 +1,20 @@
 ---
 # vars file for CODE-RADE-build-containers
+modules:
+  - name: ci
+    path:
+      RedHat: usr/share/modules/modulefiles
+      Debian: usr/share/Modules/modulefiles
+  - name: deploy
+    path:
+      RedHat: usr/share/modules/modulefiles
+      Debian: usr/share/Modules/modulefiles
+
+module_domains:
+  - astronomy
+  - bioinformatics
+  - compilers
+  - languages
+  - libraries
+  - physical_sciences
+  - hep
