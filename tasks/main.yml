@@ -13,12 +13,6 @@
   with_items:
     - centos6
     - centos7
-#
-# - name: Install Python (Ubuntu)
-#   raw: which apt-get || which python || apt-get -y update && apt-get install -y python
-
-- name: install python
-  raw: which yum || which python || yum -y update && yum install -y python python-devel
 
 - name: Update jenkins user
   user:
