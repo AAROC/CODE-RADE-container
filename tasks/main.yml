@@ -132,7 +132,7 @@
 
 - name: Template modules
   template:
-    src: "templates/{{ item.path[ansible_os_family] }}/{{item.name }}.j2"
+    src: "usr/share/modules/modulefiles/{{item.name }}.j2"
     dest: "/{{ item.path[ansible_os_family] }}/{{item.name}}"
   with_items: "{{ modules}}"
 

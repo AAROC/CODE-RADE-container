@@ -6,7 +6,7 @@ modules_path:
 modules:
   - name: ci
     path:
-      RedHat: usr/share/<odules/modulefiles
+      RedHat: usr/share/Modules/modulefiles
       Debian: usr/share/modules/modulefiles
   - name: deploy
     path:
