@@ -19,7 +19,9 @@
     name: jenkins
     home: /home/jenkins
     state: present
+    uid: 1500
     password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.
+
 - name: add keys to the authorized keys
   authorized_key:
     user: root
@@ -59,19 +61,8 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items:
-    - make
-    - git
-    - environment-modules
-    - wget
-    - bzip2
-    - vim
-    - which
-    - tree
-    - java-1.8.0-openjdk.x86_64
-    - perl-CPAN
-    - libX11-devel
-  when: ansible_os_family == "RedHat"
+  with_items: "{{ prerequisites[ansible_os_family] }}"
+
 # See, now this just makes me upset. I have to put in this dirty workaround because
 # there is a circular dependency on a frikkin perl module
 # (need cpanm for Test::more, which needs cpanm to install)
@@ -104,22 +95,7 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items:
-    - build-essential
-    - gfortran
-    - git
-    - environment-modules
-    - wget
-    - bzip2
-    - vim
-    - default-jdk
-    - tree
-    - curl
-    - m4
-    - cpanminus
-    - libx11-dev
-    - zip
-  when: "{{ ansible_os_family == 'Debian'}}"
+  with_items: "{{ prerequisites[ansible_os_family] }}"
 
 - name: Ensure Testing packages are installed
   cpanm:

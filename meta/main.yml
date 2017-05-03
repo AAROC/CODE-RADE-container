@@ -4,7 +4,7 @@ galaxy_info:
   company: C.S.I.R. Meraka Institute
   license: Apache-2.0
 
-  min_ansible_container_version: 0.9.0
+  min_ansible_container_version: 0.9.3
 
   platforms:
     - name: CEntOS

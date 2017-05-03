@@ -21,3 +21,30 @@ module_domains:
   - libraries
   - physical_sciences
   - hep
+
+prerequisites:
+  RedHat:
+    - make
+    - git
+    - environment-modules
+    - wget
+    - vim
+    - which
+    - tree
+    - java-1.8.0-openjdk.x86_64
+    - perl-CPAN
+    - libX11-devel
+  Debian:
+    - build-essential
+    - gfortran
+    - git
+    - environment-modules
+    - wget
+    - vim
+    - default-jdk
+    - tree
+    - curl
+    - m4
+    - cpanminus
+    - libx11-dev
+    - zip
