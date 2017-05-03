@@ -14,12 +14,19 @@
     - centos6
     - centos7
 
+- name: Ensure Jenkins group
+  group:
+    name: jenkins
+    gid: 1500
+    state: present
+
 - name: Update jenkins user
   user:
     name: jenkins
     home: /home/jenkins
     state: present
     uid: 1500
+    group: jenkins
     password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.
 
 - name: add keys to the authorized keys
@@ -31,10 +38,20 @@
     - brucellino
     - jenkinssagrid
 
+- name: add keys to the authorized keys
+  authorized_key:
+    user: jenkins
+    key: https://github.com/{{ item }}.keys
+    validate_certs: False
+  with_items:
+    - brucellino
+    - jenkinssagrid
+
 - name: install sshd
   package:
     name: openssh-server
     state: present
+
 - name: generate host keys
   command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
   args:
@@ -116,6 +133,7 @@
   file:
     path: "/data/modules/{{ item }}"
     state: directory
+    owner: jenkins
   with_items: module_domains
 
 - name: Ensure module dirs in CVMFS are present
