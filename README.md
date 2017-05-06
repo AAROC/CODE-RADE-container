@@ -1,4 +1,6 @@
-# Role Name
+# CODE-RADE Build Container
+
+A somewhat OS-independent role to build [CODE-RADE](https://github.com/AAROC/CODE-RADE) slaves for use in a continuous integration environment, using [Ansible-Container](https://docs.ansible.com/ansible-container).
 
 Adds a CODE-RADE build container service to your [Ansible Container](https://github.com/ansible/ansible-container) project. To be used in conjunction with [CODE-RADE Build Containers](http://doi.org/10.5281/zenodo.572275). For galaxy info, see [`meta/main.yml`](meta/main.yml)
 
@@ -57,3 +59,7 @@ Apache-2.0
 
 Bruce Becker | bbecker@csir.co.za | C.S.I.R. Meraka Institute
 [Africa-Arabia Regional Operations Centre](https://www.africa-grid.org)
+
+# Citing
+
+If you use this role in an academic or research context, please cite :
