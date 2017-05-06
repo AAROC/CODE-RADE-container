@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/89260996.svg)](https://zenodo.org/badge/latestdoi/89260996)
+
 # CODE-RADE Build Container
 
 A somewhat OS-independent role to build [CODE-RADE](https://github.com/AAROC/CODE-RADE) slaves for use in a continuous integration environment, using [Ansible-Container](https://docs.ansible.com/ansible-container).
@@ -63,3 +65,4 @@ Bruce Becker | bbecker@csir.co.za | C.S.I.R. Meraka Institute
 # Citing
 
 If you use this role in an academic or research context, please cite :
+Bruce Becker. (2017). AAROC/CODE-RADE-container: DevOps for CODE-RADE - Build Container role [Data set]. Zenodo. http://doi.org/10.5281/zenodo.572278
