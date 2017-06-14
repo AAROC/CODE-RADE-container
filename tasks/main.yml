@@ -141,3 +141,9 @@
     path: "/cvmfs/code-rade.africa-grid.org/{{ item }}"
     state: directory
   with_items: module_domains
+
+- name: Ugrade all
+  package:
+    name: "*"
+    state: latest
+    update_cache: true
