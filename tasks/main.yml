@@ -106,7 +106,7 @@
   when: ansible_os_family == 'RedHat'
   with_items:
     - '@X Software Development'
-    - '@Development tool'
+    - '@Development tools'
 
 - name: Install prerequisites (Debian)
   package:
@@ -142,8 +142,9 @@
     state: directory
   with_items: module_domains
 
-- name: Ugrade all
-  package:
-    name: "*"
+- name: Upgrade all
+  apt:
+    name: '*'
     state: latest
     update_cache: true
+  when: ansible_os_family == "Debian"
