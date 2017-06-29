@@ -22,7 +22,7 @@ module_domains:
   - physical_sciences
   - hep
   - chemistry
-  
+
 prerequisites:
   RedHat:
     - make
@@ -35,6 +35,7 @@ prerequisites:
     - java-1.8.0-openjdk.x86_64
     - perl-CPAN
     - libX11-devel
+    - tcsh
   Debian:
     - build-essential
     - gfortran
@@ -49,3 +50,5 @@ prerequisites:
     - cpanminus
     - libx11-dev
     - zip
+    - tcsh
+    # - java-1.8.0-openjdk.x86_64
