@@ -21,7 +21,8 @@ module_domains:
   - libraries
   - physical_sciences
   - hep
-
+  - chemistry
+  
 prerequisites:
   RedHat:
     - make
