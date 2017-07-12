@@ -1,0 +1,15 @@
+---
+- name: Ensure Jenkins group
+  group:
+    name: jenkins
+    gid: 1500
+    state: present
+
+- name: Update jenkins user
+  user:
+    name: jenkins
+    home: /home/jenkins
+    state: present
+    uid: 1500
+    group: jenkins
+    password: $6$9WIT0iLEtXn0y$R4iU5cWmEyFPoCZJMkyrrilXBZr4WxPgWqDBOwlRQ7rYovTIFvLHbuipOrXr6hTyASKl57YG6Pj0gwrUCR2/H.

@@ -1,0 +1,38 @@
+---
+# See, now this just makes me upset. I have to put in this dirty workaround because
+# there is a circular dependency on a frikkin perl module
+# (need cpanm for Test::more, which needs cpanm to install)
+
+- block:
+    - name: Ensure that cpanm is available
+      uri:
+        url: https://cpanmin.us/
+        dest: /bin/cpanm
+        creates: /bin/cpanm
+    - name: Ensure executable
+      file:
+        path: /bin/cpanm
+        mode: "u+rwx"
+  rescue:
+    - debug:
+        msg: "Ah, fuckit"
+  when: ansible_os_family == "RedHat"
+
+- name: Install Required Groups (RedHat)
+  yum:
+    name: "{{ item }}"
+    state: present
+  when: ansible_os_family == 'RedHat'
+  with_items:
+    - '@X Software Development'
+    - '@Development tool'
+
+- name: Install prerequisites (Debian)
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ prerequisites[ansible_os_family] }}"
+
+- name: Ensure Testing packages are installed
+  cpanm:
+    name: Test::More

@@ -1,0 +1,24 @@
+---
+- name : Ensure Modulefile dir is present
+  file:
+    path: "{{ modules_path[ansible_os_family]}}"
+    state: directory
+
+- name: Template modules
+  template:
+    src: "usr/share/modules/modulefiles/{{item.name }}.j2"
+    dest: "/{{ item.path[ansible_os_family] }}/{{item.name}}"
+  with_items: "{{ modules}}"
+
+- name: Ensure module dirs in CODE-RADE are present
+  file:
+    path: "/data/modules/{{ item }}"
+    state: directory
+    owner: jenkins
+  with_items: module_domains
+
+- name: Ensure module dirs in CVMFS are present
+  file:
+    path: "/cvmfs/code-rade.africa-grid.org/{{ item }}"
+    state: directory
+  with_items: module_domains

@@ -1,0 +1,40 @@
+---
+- name: add keys to the authorized keys
+  authorized_key:
+    user: root
+    key: https://github.com/{{ item }}.keys
+    validate_certs: False
+  with_items:
+    - brucellino
+    - jenkinssagrid
+
+- name: add keys to the authorized keys
+  authorized_key:
+    user: jenkins
+    key: https://github.com/{{ item }}.keys
+    validate_certs: False
+  with_items:
+    - brucellino
+    - jenkinssagrid
+
+- name: generate host keys
+  command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
+  args:
+    creates: "/etc/ssh/ssh_host_{{item }}_key"
+  with_items:
+    - rsa
+    - dsa
+    - ecdsa
+
+- name: ensure run dir present
+  file:
+    dest: /var/run/sshd
+    state: directory
+    owner: root
+
+- name: Replace the pam login
+  lineinfile:
+    dest: /etc/pam.d/sshd
+    line: "session    optional     pam_loginuid.so"
+    regexp: "session    required     pam_loginuid.so"
+    state: present

@@ -34,6 +34,8 @@ prerequisites:
     - java-1.8.0-openjdk.x86_64
     - perl-CPAN
     - libX11-devel
+    - openjdk-8-jdk
+    - openssh-server
   Debian:
     - build-essential
     - gfortran
@@ -42,9 +44,13 @@ prerequisites:
     - wget
     - vim
     - default-jdk
+    - openjdk-8-jdk
     - tree
     - curl
     - m4
     - cpanminus
     - libx11-dev
     - zip
+    - software-properties-common
+    - python-software-properties
+    - openssh-server

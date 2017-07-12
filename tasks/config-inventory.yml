@@ -1,0 +1,15 @@
+---
+- name: Add ubuntu build slaves to group
+  add_host:
+    name: "{{ item }}"
+    groups: ubuntu-slaves
+  with_items:
+    - ubuntu1404
+    - ubuntu1610
+- name: Add CentOS slaves to group
+  add_host:
+    name: "{{ item }}"
+    groups: centos-slaves
+  with_items:
+    - centos6
+    - centos7
