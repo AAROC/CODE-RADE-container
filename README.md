@@ -47,6 +47,7 @@ Variables are all in `vars/main.yml` :
     - libraries
     - physical_sciences
     - hep
+    - chemistry
 * `prerequisites`:  OS-specific dependencies that need to be in the build environment in order to execute compilation and tests. Intentionally kept small.
 
 ## Dependencies
