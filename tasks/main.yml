@@ -1,6 +1,6 @@
 ---
 - include: config-inventory.yml
-- include: config-ssh.yml
 - include: install-packages.yml
 - include: config-users.yml
+- include: config-ssh.yml
 - include: config-code-rade.yml
