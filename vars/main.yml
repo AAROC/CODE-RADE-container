@@ -54,3 +54,6 @@ prerequisites:
     - tcsh
     - openssh-server
     - openjdk-8-jdk
+java8_path:
+  RedHat: jre-1.8.0-openjdk.x86_64
+  Debian: /usr/lib/jvm/java-8-openjdk-amd64
