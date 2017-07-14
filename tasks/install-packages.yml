@@ -30,6 +30,7 @@
   alternatives:
     name: java
     path: "{{ java8_path[ansible_os_family][ansible_distribution_major_version]}}"
+  when: ansible_distribution_major_version == '6' || ansible_os_family == 'Debian'
 
 - name: Install Required Groups (RedHat)
   yum:
