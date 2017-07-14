@@ -36,7 +36,6 @@ prerequisites:
     - perl-CPAN
     - libX11-devel
     - tcsh
-    - openjdk-8-jdk
     - openssh-server
   Debian:
     - build-essential
