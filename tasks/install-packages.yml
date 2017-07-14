@@ -3,18 +3,22 @@
 # there is a circular dependency on a frikkin perl module
 # (need cpanm for Test::more, which needs cpanm to install)
 - block:
-  - name: prepare things for Debian
-    package:
-      name: "{{ item }}"
+    - name: prepare things for Debian
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+          - software-properties-common
+          - python-software-properties
+    - name: Add the Java ppa
+      apt_repository:
+        repo: 'ppa:openjdk-r/ppa'
+        codename: "{{ansible_distribution_release}}"
       state: present
-    with_items:
-        - software-properties-common
-        - python-software-properties
-    when: ansible_os_family == 'Debian'
-  - name: Add the Java ppa
-    apt_repository:
-      repo: 'ppa:openjdk-r/ppa'
-    state: present
+  rescue:
+    - debug:
+        msg: "Ah, fuckit"
+  when: ansible_os_family == "Debian"
 - name: Install prerequisites
   package:
     name: "{{ item }}"
