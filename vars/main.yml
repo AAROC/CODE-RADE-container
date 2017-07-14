@@ -55,5 +55,5 @@ prerequisites:
     - openssh-server
     - openjdk-8-jdk
 java8_path:
-  RedHat: jre-1.8.0-openjdk.x86_64
-  Debian: /usr/lib/jvm/java-8-openjdk-amd64
+  RedHat: /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
+  Debian: /usr/lib/jvm/java-8-openjdk-amd64/bin/java
