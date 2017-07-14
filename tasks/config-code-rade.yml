@@ -15,10 +15,10 @@
     path: "/data/modules/{{ item }}"
     state: directory
     owner: jenkins
-  with_items: module_domains
+  with_items: "{{module_domains}}"
 
 - name: Ensure module dirs in CVMFS are present
   file:
     path: "/cvmfs/code-rade.africa-grid.org/{{ item }}"
     state: directory
-  with_items: module_domains
+  with_items: "{{module_domains}}"
