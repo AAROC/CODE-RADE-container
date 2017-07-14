@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/89260996.svg)](https://zenodo.org/badge/latestdoi/89260996)
+[![Build Status](https://ci.sagrid.ac.za/buildStatus/icon?job=build-containers)](https://ci.sagrid.ac.za/job/build-containers) [![DOI](https://zenodo.org/badge/89260996.svg)](https://zenodo.org/badge/latestdoi/89260996)
 
 # CODE-RADE Build Container
 
