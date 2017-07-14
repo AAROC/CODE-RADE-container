@@ -19,11 +19,17 @@
     - debug:
         msg: "Ah, fuckit"
   when: ansible_os_family == "Debian"
+
 - name: Install prerequisites
   package:
     name: "{{ item }}"
     state: present
   with_items: "{{ prerequisites[ansible_os_family] }}"
+
+- name: correct java version selected
+  alternatives:
+    name: java
+    path: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
 - name: Install Required Groups (RedHat)
   yum:

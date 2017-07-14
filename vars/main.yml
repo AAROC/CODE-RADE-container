@@ -52,7 +52,5 @@ prerequisites:
     - libx11-dev
     - zip
     - tcsh
-    - software-properties-common
-    - python-software-properties
     - openssh-server
     - openjdk-8-jdk
