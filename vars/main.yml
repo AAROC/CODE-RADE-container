@@ -55,4 +55,4 @@ prerequisites:
     - software-properties-common
     - python-software-properties
     - openssh-server
-    - java-1.8.0-openjdk.x86_64
+    - openjdk-8-jdk
