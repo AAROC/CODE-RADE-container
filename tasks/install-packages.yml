@@ -29,7 +29,7 @@
 - name: correct java version selected
   alternatives:
     name: java
-    path: "{{ java8_path[ansible_os_family]}}"
+    path: "{{ java8_path[ansible_os_family][ansible_distribution_version]}}"
 
 - name: Install Required Groups (RedHat)
   yum:
