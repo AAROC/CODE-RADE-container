@@ -1,0 +1,3 @@
+# Ignore Python temp files from molecule
+*.pyc
+__pycache__/
