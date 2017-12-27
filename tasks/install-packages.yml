@@ -39,7 +39,7 @@
   when: ansible_os_family == 'RedHat'
   with_items:
     - '@X Software Development'
-    - '@Development tool'
+    - '@Development tools'
 
 - block:
     - name: Ensure that cpanm is available

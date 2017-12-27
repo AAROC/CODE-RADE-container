@@ -17,6 +17,8 @@
     - brucellino
     - jenkinssagrid
 
+
+# We need to add these keys to the jenkins host key verifier
 - name: generate host keys
   command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
   args:
@@ -25,6 +27,7 @@
     - rsa
     - dsa
     - ecdsa
+
 
 - name: ensure run dir present
   file:

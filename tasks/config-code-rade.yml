@@ -19,6 +19,6 @@
 
 - name: Ensure module dirs in CVMFS are present
   file:
-    path: "/cvmfs/code-rade.africa-grid.org/{{ item }}"
+    path: "/cvmfs/code-rade.africa-grid.org/modules/{{ item }}"
     state: directory
   with_items: "{{module_domains}}"
