@@ -2,3 +2,4 @@
 *.pyc
 __pycache__/
 # Ignore molecule temp files
+.molecule/
