@@ -1,5 +1,5 @@
 ---
-- include: config-inventory.yml
+# - include: config-inventory.yml
 - include: install-packages.yml
 - include: config-users.yml
 - include: config-ssh.yml
