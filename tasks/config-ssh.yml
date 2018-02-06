@@ -29,8 +29,8 @@
 #     - ecdsa
 
 # Create the host keys for each host separately and add them to the repo.
-# This is a manual step which you need to run for your own use of this 
-# role. 
+# This is a manual step which you need to run for your own use of this
+# role.
 - name: Push host ssh private keys
   copy:
     src: etc/ssh/ssh_host_{{ item }}_key

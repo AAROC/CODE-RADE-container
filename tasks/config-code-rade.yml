@@ -1,5 +1,5 @@
 ---
-- name : Ensure Modulefile dir is present
+- name: Ensure Modulefile dir is present
   file:
     path: "{{ modules_path[ansible_os_family]}}"
     state: directory
