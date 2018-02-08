@@ -8,12 +8,14 @@ addons:
     - libssl-dev
 language: python
 python:
-- 2.7
-- 3.3
+  - 2.7
+  - 3.3
+before_install:
+  - pip install --upgrade pip
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 script:
-- molecule test -s default
+  - molecule test -s default
 after_success: 
 after_failure: 
 after_script: 
