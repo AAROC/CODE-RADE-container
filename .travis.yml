@@ -11,7 +11,7 @@ python:
 - 2.7
 - 3.3
 install:
-- pip install requirements.txt
+- pip install -r requirements.txt
 script:
 - molecule test -s default
 after_success: 
