@@ -14,9 +14,8 @@ galaxy_info:
         - 7
     - name: Ubuntu
       versions:
-        - 14.04
-        - 16.10
-
+        - trusty
+        - xenial
   galaxy_tags:
     - container
     - ci
