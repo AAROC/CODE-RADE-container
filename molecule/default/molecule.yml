@@ -10,8 +10,8 @@ platforms:
     image: centos:7
 provisioner:
   name: ansible
-  options:
-    vault-password-file: ../../.vault_file
+  # options:
+  #   vault-password-file: ../../.vault_file
   lint:
     name: ansible-lint
 scenario:
