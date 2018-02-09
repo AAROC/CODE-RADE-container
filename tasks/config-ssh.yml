@@ -19,15 +19,42 @@
 
 
 # We need to add these keys to the jenkins host key verifier
-- name: generate host keys
-  command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
-  args:
-    creates: "/etc/ssh/ssh_host_{{item }}_key"
+# - name: generate host keys
+#   command: "ssh-keygen -f /etc/ssh/ssh_host_{{item }}_key -N '' -t {{ item }}"
+#   args:
+#     creates: "/etc/ssh/ssh_host_{{item }}_key"
+#   with_items:
+#     - rsa
+#     - dsa
+#     - ecdsa
+
+# Create the host keys for each host separately and add them to the repo.
+# This is a manual step which you need to run for your own use of this
+# role.
+- name: Push host ssh private keys
+  copy:
+    src: etc/ssh/ssh_host_{{ item }}_key
+    dest: /etc/ssh/ssh_host_{{ item }}_key
+    owner: root
+    group: root
+    # decrypt: yes
   with_items:
     - rsa
     - dsa
     - ecdsa
+# validate : restart ssh
 
+- name: Push host ssh public keys
+  copy:
+    src: etc/ssh/ssh_host_{{ item }}_key.pub
+    dest: /etc/ssh/ssh_host_{{ item }}_key.pub
+    owner: root
+    group: root
+    # decrypt: yes
+  with_items:
+    - rsa
+    - dsa
+    - ecdsa
 
 - name: ensure run dir present
   file:
@@ -39,5 +66,5 @@
   lineinfile:
     dest: /etc/pam.d/sshd
     line: "session    optional     pam_loginuid.so"
-    regexp: "session    required     pam_loginuid.so"
+    regexp: '^session\s*optional\s*pam_loginuid\.so$'
     state: present

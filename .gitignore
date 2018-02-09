@@ -3,3 +3,4 @@
 __pycache__/
 # Ignore molecule temp files
 .molecule/
+.vault_file
