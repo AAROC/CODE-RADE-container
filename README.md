@@ -1,4 +1,8 @@
-[![Build Status](https://ci.sagrid.ac.za/buildStatus/icon?job=build-containers)](https://ci.sagrid.ac.za/job/build-containers) [![DOI](https://zenodo.org/badge/89260996.svg)](https://zenodo.org/badge/latestdoi/89260996)
+[![Build Status](https://ci.sagrid.ac.za/buildStatus/icon?job=build-containers)](https://ci.sagrid.ac.za/job/build-containers) [![Build Status](https://travis-ci.org/AAROC/CODE-RADE-container.svg?branch=master)](https://travis-ci.org/AAROC/CODE-RADE-container)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e0a914e6a4a8be5522b/maintainability)](https://codeclimate.com/github/AAROC/CODE-RADE-container/maintainability)
+
+[![DOI](https://zenodo.org/badge/89260996.svg)](https://zenodo.org/badge/latestdoi/89260996) 
 
 # CODE-RADE Build Container
 

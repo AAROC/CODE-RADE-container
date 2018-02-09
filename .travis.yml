@@ -1,24 +1,25 @@
----
 sudo: required
 dist: trusty
 addons:
   apt:
     packages:
-      - python-pip
-      - libffi-dev git
-      - libssl-dev
+    - python-pip
+    - libffi-dev git
+    - libssl-dev
 language: python
 python:
-  - 2.7
+- 2.7
 before_install:
-  - pip install --upgrade pip
+- openssl aes-256-cbc -K $encrypted_db500cacd564_key -iv $encrypted_db500cacd564_iv
+  -in .vault_file.enc -out .vault_file -d
+- pip install --upgrade pip
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - molecule test -s default
-after_success:
-after_failure:
-after_script:
+- molecule test -s default
+after_success: 
+after_failure: 
+after_script: 
 notifications:
   slack:
     secure: uPy8G32P1rZa1FENJ4K4RxofSx69UzBn6fjzZ5SZt90mYB6teWsAJhHaURjWle9ypuyJKLKJ4NyK3/THQUjm4IIbQTFii9edoLGE9vbjD7zoxIdP6GZjXCbXa7HapvOZJSNKvqh5owHtbABrDg0404CFLWL0QbSljGsLZKDw2YWMP2D8TRC24Kckm1ibDaudBqPfaH/Iv4SWS1xIde87gVp4CmVpNCqnp9AaI/d8OTuJucLDKb7UzHVMfF93+sdYRcwtf4ByxPmkUfYCcVxor2LufGEAwCAe52tOrHR0H2TQzZH/9GDf0xHLUTW0SabaPqViX/iDlkvorX5ip0ULejOl8msUtlzF+nfan6gA/yzmJMXb5KJ7VACM4Cf+o0PvLKkdOD4OY8yLYD+Hf2z3WRYZg2Yf+3IyU7z51JcZww0LLd5Qbugw1DOUSZparIMr0a/s4zeIBW6EB6ba66ghaDv1NDWM7Br0WyktcBsSIzcqVeT9MruusgRv9NZHQnC4OUuMK+GouGvbsTV5iqcJ4zWmufVNMkuBv5FKJN5hJTo1fZ89WDXBY0qr7/OhQ80Dn2KSOhcA4yd48L9nJx5HJDicEvoFQt++RWJxkyyAaSrSGl/fkpGmmMkeLXMT9MRG7H+0ImJ9EMT7C4ToRZr7QeA8xYFgpiANS0sHggAwBsU=
