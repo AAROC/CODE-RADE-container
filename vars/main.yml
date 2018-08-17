@@ -1,5 +1,14 @@
 ---
 # vars file for CODE-RADE-build-containers
+openssh_version: 7.7p1
+openssh_url: https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/
+openssh_build_dir: /root/openssh
+openssh_files:
+  - /usr/local/bin/sshd
+  - /usr/local/bin/ssh
+  - /usr/local/bin/scp
+  - /usr/local/bin/sftp
+  - /usr/local/libexec/sftp-server
 modules_path:
   RedHat: usr/share/Modules/modulefiles
   Debian: usr/share/modules/modulefiles
@@ -36,7 +45,8 @@ prerequisites:
     - perl-CPAN
     - libX11-devel
     - tcsh
-    - openssh-server
+    - openssl-devel
+    - zlib-devel
   Debian:
     - build-essential
     - gfortran
@@ -52,8 +62,10 @@ prerequisites:
     - libx11-dev
     - zip
     - tcsh
-    - openssh-server
+    - libssl-dev
     - openjdk-8-jdk
+    - libz-dev
+    - libssl-dev
 java8_path:
   RedHat:
     "6": /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java

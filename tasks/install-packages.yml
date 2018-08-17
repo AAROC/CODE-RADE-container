@@ -61,3 +61,30 @@
 - name: Ensure Testing packages are installed
   cpanm:
     name: Test::More
+
+- name: Get OpenSSH
+  unarchive:
+    src: "{{ openssh_url }}/openssh-{{ openssh_version }}.tar.gz"
+    dest: /root/openssh
+    group: root
+    remote_src: yes
+    list_files: no
+    keep_newer: no
+    unsafe_writes: no
+    owner: root
+    validate_certs: yes
+
+- name: Configure OpenSSH
+  command:
+    free_form: ./configure
+    warn: no
+    creates: Makefile
+    chdir: "{{ openssh_build_dir }}"
+
+- name: Install OpenSSH
+  command:
+    free_form: make install
+    warn: no
+    creates: "{{ item }}"
+    chdir: "{{ openssh_build_dir }}"
+  loop: "{{ openssh_files }}"
