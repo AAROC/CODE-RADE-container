@@ -1,12 +1,12 @@
 ---
-- name: add keys to the authorized keys
+- name: add keys to the authorized keys (root)
   authorized_key:
     user: root
     key: "https://github.com/{{ item }}.keys"
     validate_certs: False
   loop: "{{ user_keys }}"
 
-- name: add keys to the authorized keys
+- name: add keys to the authorized keys (jenkins)
   authorized_key:
     user: jenkins
     key: "https://github.com/{{ item }}.keys"
@@ -24,7 +24,7 @@
     owner: root
     group: root
     decrypt: yes
-    mode: 'u+r'
+    mode: 0400
   loop: "{{ ssh_key_types }}"
 # validate : restart ssh
 
