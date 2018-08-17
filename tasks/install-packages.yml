@@ -47,6 +47,7 @@
         url: https://cpanmin.us/
         dest: /bin/cpanm
         creates: /bin/cpanm
+        validate_certs: no
     - name: Ensure executable
       file:
         path: /bin/cpanm

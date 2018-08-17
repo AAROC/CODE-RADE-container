@@ -1,6 +1,6 @@
 ---
 # - include: config-inventory.yml
-- include: install-packages.yml
-- include: config-users.yml
-- include: config-ssh.yml
-- include: config-code-rade.yml
+- include_tasks: install-packages.yml
+- include_tasks: config-users.yml
+- include_tasks: config-ssh.yml
+- include_tasks: config-code-rade.yml
