@@ -17,7 +17,7 @@ def test_hosts_file(host):
 def test_ssh(host):
     s = host.socket('tcp://22')
     assert s.is_listening
-    
+
     config_file = host.file('/usr/local/etc/sshd_config')
     assert config_file.exists
     assert config_file.is_file
