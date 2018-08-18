@@ -20,7 +20,7 @@
 - name: Push host ssh private keys
   copy:
     src: "etc/ssh/ssh_host_{{ item }}_key"
-    dest: "/usr/local/etc/ssh/ssh_host_{{ item }}_key"
+    dest: "{{ openssh_install_dir}}/etc/ssh_host_{{ item }}_key"
     owner: root
     group: root
     decrypt: yes
@@ -31,7 +31,7 @@
 - name: Push host ssh public keys
   copy:
     src: "etc/ssh/ssh_host_{{ item }}_key.pub"
-    dest: "/etc/ssh/ssh_host_{{ item }}_key.pub"
+    dest: "{{ openssh_install_dir }}/etc/ssh_host_{{ item }}_key.pub"
     owner: root
     group: root
   loop: "{{ ssh_key_types }}"
@@ -42,16 +42,40 @@
     state: directory
     owner: root
 
-- name: Replace the pam login
-  lineinfile:
-    dest: /etc/pam.d/sshd
-    line: "session    optional     pam_loginuid.so"
-    regexp: '^session\s*optional\s*pam_loginuid\.so$'
+# - name: Replace the pam login
+#   lineinfile:
+#     dest: /etc/pam.d/sshd
+#     line: "session    optional     pam_loginuid.so"
+#     regexp: '^session\s*optional\s*pam_loginuid\.so$'
+#     state: present
+
+- name: Ensure SSHD user group is present
+  group:
+    name: "{{ sshd_group_name }}"
+    state: present
+    gid: "{{ sshd_user_gid }}"
+
+
+- name: Ensure sshd user for privelige separation
+  user:
+    name: "{{ sshd_user_name }}"
+    comment: SSHD privelige separation user
+    ssh_key_bits: 2048
+    update_password: always
+    non_unique: no
+    force: no
+    createhome: no
+    groups: "{{ sshd_group_name }}"
+    home: /var/run/sshd
+    generate_ssh_key: no
+    uid: "{{ sshd_user_uid }}"
+    group: "{{ sshd_user_gid }}"
+    shell: /bin/nologin
     state: present
 
 - name: Template SSHD config
   template:
-    dest: /etc/ssh/sshd_config
+    dest: "{{ openssh_install_dir }}/etc/sshd_config"
     src: etc/ssh/sshd_config.j2
     owner: root
     group: root
@@ -59,3 +83,4 @@
     validate: "sshd -T -f %s"
     mode: 'u=rw'
     backup: yes
+  notify: Start SSHD

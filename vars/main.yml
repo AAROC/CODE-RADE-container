@@ -3,12 +3,17 @@
 openssh_version: 7.7p1
 openssh_url: https://cloudflare.cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 openssh_build_dir: /root/openssh
+openssh_install_dir: /usr/local
 openssh_files:
-  - /usr/local/bin/sshd
-  - /usr/local/bin/ssh
-  - /usr/local/bin/scp
-  - /usr/local/bin/sftp
-  - /usr/local/libexec/sftp-server
+  - /sbin/sshd
+  - /bin/ssh
+  - /bin/scp
+  - /bin/sftp
+  - /libexec/sftp-server
+sshd_user_gid: 1200
+sshd_user_uid: 1200
+sshd_group_name: sshd
+sshd_user_name: sshd
 modules_path:
   RedHat: usr/share/Modules/modulefiles
   Debian: usr/share/modules/modulefiles
@@ -47,6 +52,8 @@ prerequisites:
     - tcsh
     - openssl-devel
     - zlib-devel
+    - pam-devel
+    - net-tools
   Debian:
     - build-essential
     - gfortran
@@ -66,6 +73,8 @@ prerequisites:
     - openjdk-8-jdk
     - libz-dev
     - libssl-dev
+    - libpam-dev
+    - net-tools
 java8_path:
   RedHat:
     "6": /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java

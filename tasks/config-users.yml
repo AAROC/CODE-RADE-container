@@ -9,6 +9,7 @@
   user:
     name: jenkins
     home: /home/jenkins
+    shell: /bin/bash
     state: present
     uid: 1500
     group: jenkins

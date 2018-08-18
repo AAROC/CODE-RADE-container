@@ -8,16 +8,14 @@ Port 22
 #ListenAddress 0.0.0.0
 Protocol 2
 # HostKeys for protocol version 2
-HostKey /usr/local/etc/ssh/ssh_host_rsa_key
-HostKey /usr/local/etc/ssh/ssh_host_dsa_key
-HostKey /usr/local/etc/ssh/ssh_host_ecdsa_key
-HostKey /usr/local/etc/ssh/ssh_host_ed25519_key
+{% for keytype in ssh_key_types %}
+HostKey {{ openssh_install_dir }}/etc/ssh_host_{{ keytype }}_key
+{% endfor %}
 #Privilege Separation is turned on for security
 UsePrivilegeSeparation yes
 
 # Lifetime and size of ephemeral version 1 server key
 KeyRegenerationInterval 3600
-ServerKeyBits 2048
 
 # Logging
 SyslogFacility AUTH
@@ -85,5 +83,5 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
+UsePAM no
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr

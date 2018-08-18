@@ -62,6 +62,16 @@
   cpanm:
     name: Test::More
 
+- name: Ensure Build Dir
+  file:
+    path: "{{ openssh_build_dir }}"
+    force: no
+    owner: root
+    group: root
+    unsafe_writes: no
+    state: directory
+    mode: "u+rwx"
+
 - name: Get OpenSSH
   unarchive:
     src: "{{ openssh_url }}/openssh-{{ openssh_version }}.tar.gz"
@@ -75,16 +85,16 @@
     validate_certs: yes
 
 - name: Configure OpenSSH
-  command:
-    free_form: ./configure
+  command: "{{ openssh_build_dir }}/openssh-{{ openssh_version }}/configure --prefix={{ openssh_install_dir }}"
+  args:
     warn: no
     creates: Makefile
-    chdir: "{{ openssh_build_dir }}"
+    chdir: "{{ openssh_build_dir }}/openssh-{{ openssh_version }}"
 
 - name: Install OpenSSH
-  command:
-    free_form: make install
+  command: make install
+  args:
     warn: no
-    creates: "{{ item }}"
-    chdir: "{{ openssh_build_dir }}"
-  loop: "{{ openssh_files }}"
+    # creates: "{{ openssh_install_dir }}/{{ item }}"
+    chdir: "{{ openssh_build_dir }}/openssh-{{ openssh_version }}"
+    # loop: "{{ openssh_files }}"

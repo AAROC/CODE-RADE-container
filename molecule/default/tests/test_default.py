@@ -15,26 +15,25 @@ def test_hosts_file(host):
 
 
 def test_ssh(host):
-    s = host.socket('tcp://5200')
-    # self.assertEqual(self.host.run("sshd -T").rc, 0)
-    # assert s.is_listening
-    config_file = host.file('/etc/ssh/sshd_config')
+    s = host.socket('tcp://22')
+    assert s.is_listening
     
+    config_file = host.file('/usr/local/etc/sshd_config')
     assert config_file.exists
     assert config_file.is_file
     assert config_file.user == 'root'
     assert config_file.group == 'root'
-    assert config_file.mode == 0o600
+    assert config_file.mode == '0640'
 
 
 def test_ssh_keys(host):
-    host_key_file = host.file('/etc/ssh/ssh_host_dsa_key')
-    
+    host_key_file = host.file('/usr/local/etc/ssh_host_dsa_key')
+
     assert host_key_file.exists
     assert host_key_file.is_file
     assert host_key_file.user == 'root'
     assert host_key_file.group == 'root'
-    assert host_key_file.mode == 0o600
+    assert host_key_file.mode == '0600'
 
 
 def test_jenkins(host):
