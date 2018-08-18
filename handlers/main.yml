@@ -1,4 +1,4 @@
 ---
 # handlers file for CODE-RADE-build-containers
 - name: Start SSHD
-  command: "{{ openssh_install_dir }}/sbin/sshd -D -p 22}}"
+  command: "{{ openssh_install_dir }}/sbin/sshd -D -p 2222}}"

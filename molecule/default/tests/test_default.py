@@ -15,7 +15,7 @@ def test_hosts_file(host):
 
 
 def test_ssh(host):
-    s = host.socket('tcp://22')
+    s = host.socket('tcp://2222')
     assert s.is_listening
 
     config_file = host.file('/usr/local/etc/sshd_config')
