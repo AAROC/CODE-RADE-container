@@ -8,17 +8,26 @@
   template:
     src: "usr/share/modules/modulefiles/{{item.name }}.j2"
     dest: "/{{ item.path[ansible_os_family] }}/{{item.name}}"
-  with_items: "{{ modules}}"
+  loop: "{{ modules}}"
 
 - name: Ensure module dirs in CODE-RADE are present
   file:
     path: "/data/modules/{{ item }}"
     state: directory
     owner: jenkins
-  with_items: "{{module_domains}}"
+  loop: "{{module_domains}}"
 
 - name: Ensure module dirs in CVMFS are present
   file:
     path: "/cvmfs/code-rade.africa-grid.org/modules/{{ item }}"
     state: directory
-  with_items: "{{module_domains}}"
+  loop: "{{module_domains}}"
+
+- name: Ensure CI dirs present
+  file:
+    path: "{{ CODE_RADE_CI }}/{{ item }}"
+    owner: jenkins
+    group: jenkins
+    state: directory
+    mode: u+rwx
+  loop: "{{ ci_dirs }}"

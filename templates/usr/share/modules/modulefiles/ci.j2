@@ -5,8 +5,7 @@
 setenv        SOFT_DIR               /data/ci-build/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
 setenv        REPO_DIR               /data/artefacts/$::env(SITE)/$::env(OS)/$::env(ARCH)/$::env(NAME)/$::env(VERSION)
 setenv        SRC_DIR                /data/src/$::env(NAME)/$::env(VERSION)
-
-set               MODULES                                    /data/modules
+set           MODULES                                    /data/modules
 {% for module in module_domains %}
 setenv        {{ module | upper }}                      $MODULES/{{ module }}
 {% endfor %}

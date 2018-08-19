@@ -37,6 +37,11 @@ module_domains:
   - hep
   - chemistry
 
+CODE_RADE_CI: /data
+ci_dirs:
+  - src
+  - ci-build
+  - artefacts
 prerequisites:
   RedHat:
     - make
