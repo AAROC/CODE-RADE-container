@@ -1,35 +1,43 @@
----
 sudo: required
 dist: trusty
 addons:
   apt:
     packages:
-      - python-pip
-      - libffi-dev git
-      - libssl-dev
+    - python-pip
+    - libffi-dev git
+    - libssl-dev
 services:
-  - docker
+- docker
 language: python
 python:
-  - 2.7
+- 2.7
+env:
+  global:
+    secure: rWmQ+GxrtUtIFZqqWh9wGySmPNu55dBxQqbJCZRoYbo/G4n0eGhsy9UDb9wG+XQe4VT6saRfYdIE5Z0VNGtG/Hz8+u1P6ulQX2ZCNj2Za2LL8kUR8qfnEN1y+m9S7rtmDvAHxQiAU+WE1EdrJ39XMpOgINdlNTN3o6PXp4dDCSOt27VF/YDWh4Q/+vT2L3HHI4cZ9cHeGj0HdyDBGz8QmJpuLf+jfIxzJTwgY4bDQL7bnxFUq+r73mpL43hnQK2U6wHGgpO1BbI4zRfiARvIqQe+PAnu8C32P4BESd+NruP6DJcccmT7izT35yfTJW7ua5fhdk9CDhs+LbZe8aSeZjvoua+wXVBxxXLA2f6mfG03A/SBimZ+8Ckn9jgJV09A73QQZRkL+kKNfcAIdhXj3Ffvkt0twPLiLEWdcrFpTvjnCDJSXCL8AlcAaM4uiI/gzibFFINJifs428vo6bLg+O8Ucu6Jz3fY92+h/+wGNQrKZg4JjNIY5A9mVOsmwh+e2zP86epAyzwpGzU5VK+FI7P6unEKPy1vqG7D9UW3kk8UwlafNYJuc3WY1V0iuD98XL5CoyFbP5qQYelQIlGVgWEClJoRF/83c8RQ73Cf+EhaaO8pd2EBj+rQeP954cqkmGZe0Kp3mwFlKOD7/+AWBO2fr0YOxdX7AY6Funv9Lok=
+
 before_install:
-  - |
-    openssl aes-256-cbc -K $encrypted_db500cacd564_key -iv $encrypted_db500cacd564_iv -in .vault_file.enc -out .vault_file -d
-  - pip install --upgrade pip
+- 'openssl aes-256-cbc -K $encrypted_db500cacd564_key -iv $encrypted_db500cacd564_iv
+  -in .vault_file.enc -out .vault_file -d'
+- pip install --upgrade pip
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - molecule converge -s default
-  - molecule verify -s default
+- molecule converge -s default
+- molecule verify -s default
 after_success:
-  - docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1404 quay.io/aaroc/code-rade-ubuntu1404
-  - docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1604 quay.io/aaroc/code-rade-ubuntu1610
-  - docker commit -m $TRAVIS_COMMIT_MESSAGE centos6 quay.io/aaroc/code-rade-centos6
-  - docker commit -m $TRAVIS_COMMIT_MESSAGE centos7 quay.io/aaroc/code-rade-centos7
+- docker login -u="aaroc+buildy_mc_testface" -p=$QUAY_PASSWORD quay.io
+- docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1404 quay.io/aaroc/code-rade-ubuntu1404
+- docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1604 quay.io/aaroc/code-rade-ubuntu1610
+- docker commit -m $TRAVIS_COMMIT_MESSAGE centos6 quay.io/aaroc/code-rade-centos6
+- docker commit -m $TRAVIS_COMMIT_MESSAGE centos7 quay.io/aaroc/code-rade-centos7
+- docker push quay.io/aaroc/code-rade-ubuntu1404
+- docker push quay.io/aaroc/code-rade-ubuntu1610
+- docker push quay.io/aaroc/code-rade-centos6
+- docker push quay.io/aaroc/code-rade-centos7
 after_failure:
-  - molecule destroy -s default
+- molecule destroy -s default
 after_script:
-  - molecule destroy -s default
+- molecule destroy -s default
 notifications:
   slack:
     secure: uPy8G32P1rZa1FENJ4K4RxofSx69UzBn6fjzZ5SZt90mYB6teWsAJhHaURjWle9ypuyJKLKJ4NyK3/THQUjm4IIbQTFii9edoLGE9vbjD7zoxIdP6GZjXCbXa7HapvOZJSNKvqh5owHtbABrDg0404CFLWL0QbSljGsLZKDw2YWMP2D8TRC24Kckm1ibDaudBqPfaH/Iv4SWS1xIde87gVp4CmVpNCqnp9AaI/d8OTuJucLDKb7UzHVMfF93+sdYRcwtf4ByxPmkUfYCcVxor2LufGEAwCAe52tOrHR0H2TQzZH/9GDf0xHLUTW0SabaPqViX/iDlkvorX5ip0ULejOl8msUtlzF+nfan6gA/yzmJMXb5KJ7VACM4Cf+o0PvLKkdOD4OY8yLYD+Hf2z3WRYZg2Yf+3IyU7z51JcZww0LLd5Qbugw1DOUSZparIMr0a/s4zeIBW6EB6ba66ghaDv1NDWM7Br0WyktcBsSIzcqVeT9MruusgRv9NZHQnC4OUuMK+GouGvbsTV5iqcJ4zWmufVNMkuBv5FKJN5hJTo1fZ89WDXBY0qr7/OhQ80Dn2KSOhcA4yd48L9nJx5HJDicEvoFQt++RWJxkyyAaSrSGl/fkpGmmMkeLXMT9MRG7H+0ImJ9EMT7C4ToRZr7QeA8xYFgpiANS0sHggAwBsU=
