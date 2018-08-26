@@ -80,6 +80,34 @@ prerequisites:
     - libssl-dev
     - libpam-dev
     - net-tools
+unnecessary_packages:
+  RedHat:
+    - kernel-debug-devel
+  Debian:
+    - openssh-client
+    - libedit2
+    - libxmuu1
+# Variable for fixing vulnerable packages found by Clair on Quay
+# For each version, look at the tag tab on Quay and add packages
+# for which there is a fix to the list.
+# Each package should have a name and version
+security_updates:
+  RedHat:
+    '6':
+      - name: dbus-glib
+        version: 0.86-6.el6_4
+    '7':
+      - name: kernel-debug-devel
+        version: 4.14.0-49.8.1.el7a
+  Debian:
+    '14.04':
+      - name: thing
+        version: not_thing
+    '16.10':
+      - name: thing
+        version: not_thing
+
+
 java8_path:
   RedHat:
     "6": /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java

@@ -1,0 +1,17 @@
+---
+# Tasks for ensuring secure containers
+- name: Ensure unneded packages are  absent
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ unnecessary_packages[ansible_os_family] }}"
+  tags: security
+
+# This is not a _great_ idea, because we are trying to maintain
+# Dev-Prod parity. But we'll keep it in here just in case.
+- name: Ensure detected vulnerabilities have been patched
+  package:
+    state: present
+    name: "{{ item.name }}-{{ item.version }}"
+  loop: "{{ security_updates[ansible_os_family][ansible_distribution_major_version] }}"
+  tags: security

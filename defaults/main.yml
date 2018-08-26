@@ -6,3 +6,4 @@ user_keys:
 ssh_key_types:
   - dsa
   - ecdsa
+security_updates: false

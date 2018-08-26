@@ -19,6 +19,15 @@ Included in the image are:
 The ssh service is used by the Jenkins server to start the connection to the master, it listens on port 2222, which can be tweaked in the variables.
 The bare minimum of libraries and dependencies are installed, so as to make the image itself lightweight and ensure that unmet dependencies are not requested in the production environment.
 
+## Platform
+
+We try to maintain Dev/Prod parity with EGI infrastructure. This means that we support the following Operating Systems:
+
+  - CEntOS6: [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-centos6/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-centos6)
+  - CEntOS7: [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-centos7/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-centos7)
+  - Ubuntu 14.04: [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-ubuntu1404/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-ubuntu1404)
+  - Ubuntu 16.04: [![Docker Repository on Quay](https://quay.io/repository/aaroc/code-rade-ubuntu1610/status "Docker Repository on Quay")](https://quay.io/repository/aaroc/code-rade-ubuntu1610)
+
 ## Building
 
 Adds a CODE-RADE build container service to your [Ansible Container](https://github.com/ansible/ansible-container) project. To be used in conjunction with [CODE-RADE Build Containers](http://doi.org/10.5281/zenodo.572275). For galaxy info, see [`meta/main.yml`](meta/main.yml)
