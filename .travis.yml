@@ -26,10 +26,10 @@ script:
 - molecule verify -s default
 after_success:
 - docker login -u="aaroc+buildy_mc_testface" -p=$QUAY_PASSWORD quay.io
-- docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1404 quay.io/aaroc/code-rade-ubuntu1404
-- docker commit -m $TRAVIS_COMMIT_MESSAGE ubuntu1604 quay.io/aaroc/code-rade-ubuntu1610
-- docker commit -m $TRAVIS_COMMIT_MESSAGE centos6 quay.io/aaroc/code-rade-centos6
-- docker commit -m $TRAVIS_COMMIT_MESSAGE centos7 quay.io/aaroc/code-rade-centos7
+- docker commit -m "${TRAVIS_COMMIT_MESSAGE}" ubuntu1404 quay.io/aaroc/code-rade-ubuntu1404:latest
+- docker commit -m "${TRAVIS_COMMIT_MESSAGE}" ubuntu1604 quay.io/aaroc/code-rade-ubuntu1610:latest
+- docker commit -m "${TRAVIS_COMMIT_MESSAGE}" centos6 quay.io/aaroc/code-rade-centos6:latest
+- docker commit -m "${TRAVIS_COMMIT_MESSAGE}" centos7 quay.io/aaroc/code-rade-centos7:latest
 - docker push quay.io/aaroc/code-rade-ubuntu1404
 - docker push quay.io/aaroc/code-rade-ubuntu1610
 - docker push quay.io/aaroc/code-rade-centos6
