@@ -15,13 +15,23 @@
     path: "/data/modules/{{ item }}"
     state: directory
     owner: jenkins
+    group: jenkins
   loop: "{{module_domains}}"
 
 - name: Ensure module dirs in CVMFS are present
   file:
     path: "/cvmfs/code-rade.africa-grid.org/modules/{{ item }}"
     state: directory
+    owner: jenkins
+    group: jenkins
   loop: "{{module_domains}}"
+
+- name: Ensure that CVMFS deploy dir is owned by jenkins
+  file:
+    path: "/cvmfs/code-rade.africa-grid.org/"
+    state: directory
+    owner: jenkins
+    group: jenkins
 
 - name: Ensure CI dirs present
   file:
